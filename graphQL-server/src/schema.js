@@ -8,6 +8,14 @@ const typeDefs = `
     type Query {
         hello: String
         greet(name: String!): String 
+        tasks: [Task]
+    }
+    
+    type Task {
+        _id: ID
+        title: String
+        description: String
+        number: Int
     }
 `;
 
