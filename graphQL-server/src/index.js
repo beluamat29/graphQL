@@ -1,10 +1,14 @@
 import express from "express"
-import graphql from "express-graphql"
+import graphqlHTTP from "express-graphql"
 const app = express();
 
 const schema  = {};
 
-app.use('/graphql', graphql({
+app.get('/', (req, res) => {
+    res.json({message: 'tu vieja'})
+})
+app.use('/graphql', graphqlHTTP({
+    //Utiliza graphqlHTTP oara procesar esa ruta
     graphiql: true,
     schema: schema
 }))
