@@ -1,17 +1,13 @@
-import tasks from './examples'
+import {pinos} from './examples'
 
 export const resolvers = {
     //cada uno de estos es un resolver
     Query: {
-        hello() {
-            return 'HELLO WORLD'
+        pinos() {
+            return pinos
         },
-        greet(root, args){
-            console.log(args)
-            return `Hello ${args.name}!`
-        },
-        tasks() {
-            return tasks
+        lenguajeDePino(obj, args){
+            return pinos.find(pino => pino.nombre === args.nombre).lenguajes
         }
     }
 };

@@ -1,22 +1,12 @@
-export const tasks = [
+export const pinos = [
     {
-        _id: 0,
-        title: 'Do homework',
-        description: 'bla bla bla',
-        number: 100
+        nombre: "Belu",
+        jardinero: "Lucas",
+        lenguajes: ["JavaScript", "Ruby"]
     },
     {
-        _id: 1,
-        title: 'Do shopping',
-        description: 'bla bla bla',
-        number: 130
-    },
-    {
-        _id: 2,
-        title: 'Take a nap',
-        description: 'bla bla bla',
-        number: 90
+        nombre: "Joaco",
+        jardinero: "Dario",
+        lenguajes: ["JavaScript", "Ruby", "Cristal", "Java"]
     }
-
-
-]
+];

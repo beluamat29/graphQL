@@ -4,20 +4,21 @@ import { resolvers } from './resolvers.js'
 //GraphQL Schema language. Es similar al lenguaje de consulta PERO NO ES EL MISMO. Permite abstreaernos del lenguaje del backend
 //The most basic components of a GraphQL Schema are object types, which just represent a kind of object you can fetch from your service, and what fields it has.
 
-const typeDefs = `
+const typeDefs = ` 
     type Query {
-        hello: String
-        greet(name: String!): String 
-        tasks: [Task]
+      pinos: [Pino]
+      lenguajeDePino(nombre: String): [String]
     }
     
-    type Task {
-        _id: ID
-        title: String
-        description: String
-        number: Int
+    type Pino {
+        nombre: String!
+        jardinero: String
+        lenguajes: [ String ]
     }
 `;
+
+//PINO ES UN GRAPHQL OBJECT TYPE
+//En cualquier servidor GraphQL DEBE existir el type Query. Mutation es opcional
 
 //PARA PODER LEVANTAR LA APP DEBE HABER POR LO MENOS UNA QUERY
 //PERO PARA QUE LAS QUERYS DEVUELVAN DATOS, TIENE QUE HABER UN RESOLVER QUE SE HAGA CARGO DE ELLAS
