@@ -6,8 +6,11 @@ export const resolvers = {
         pinos() {
             return pinos
         },
-        lenguajeDePino(obj, args){
+        lenguajeDePino(obj, args) {
             return pinos.find(pino => pino.nombre === args.nombre).lenguajes
+        },
+        conGolosinaFavorita(obj, args){
+            return pinos.filter(pino => pino.golosina === args.golosina)
         }
     }
 };

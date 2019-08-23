@@ -8,12 +8,27 @@ const typeDefs = `
     type Query {
       pinos: [Pino]
       lenguajeDePino(nombre: String): [String]
+      proyecto(nombre: String): Proyecto
+      conGolosinaFavorita(golosina: GolosinaFavorita): [Pino]
     }
     
     type Pino {
         nombre: String!
-        jardinero: String
+        jardinero: String!
         lenguajes: [ String ]
+        golosina: GolosinaFavorita
+    }
+    
+    type Proyecto {
+        nombre: String!
+        pinos: [Pino!]! 
+        enIngles: Boolean
+    }
+    
+    enum GolosinaFavorita {
+        SKITTLES,
+        OREOS,
+        SUGUS
     }
 `;
 
