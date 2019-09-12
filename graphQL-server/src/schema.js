@@ -7,30 +7,50 @@ import { resolvers } from './resolvers.js'
 const typeDefs = ` 
     type Query {
       pinos: [Pino]
-      lenguajeDePino(nombre: String): [String]
-      proyecto(nombre: String): Proyecto
+      pino(nombre: String): Pino
+      lenguajesDePino(nombre: String): [String]
+      proyectoDePino(nombre: String): Proyecto
       conGolosinaFavorita(golosina: GolosinaFavorita): [Pino]
+    }
+    
+    type Mutation {
+        agregarPino(input: PinoInput): Pino
     }
     
     type Pino {
         nombre: String!
-        jardinero: String!
+        jardinero: Pino
         lenguajes: [ String ]
         golosina: GolosinaFavorita
     }
     
     type Proyecto {
         nombre: String!
-        pinos: [Pino!]! 
+        pinos: [Pino]
         enIngles: Boolean
     }
     
-    enum GolosinaFavorita {
+     enum GolosinaFavorita {
         SKITTLES,
         OREOS,
         SUGUS
     }
+    
+    input PinoInput {
+        nombre: String!,
+        jardinero: String!,
+        lenguajes: [String]!,
+        golosina: GolosinaFavorita!
+    }
+
 `;
+
+
+//POSIBLES CONSULTAS:
+// LISTA DE GOLOSINAS DE TODOS LOS PINOS DE UN PROYECTO
+//GOLOSINA MAS POPULAR EN UN PROYECTO
+//GOLOSINA DEL JARDINERO DE ALGUIEN
+//COMPAÑEROS DE PROYECTO DE ALGUIEN
 
 //PINO ES UN GRAPHQL OBJECT TYPE
 //En cualquier servidor GraphQL DEBE existir el type Query. Mutation es opcional
@@ -38,7 +58,6 @@ const typeDefs = `
 //PARA PODER LEVANTAR LA APP DEBE HABER POR LO MENOS UNA QUERY
 //PERO PARA QUE LAS QUERYS DEVUELVAN DATOS, TIENE QUE HABER UN RESOLVER QUE SE HAGA CARGO DE ELLAS
 
-//TODO: Mostrar que pasa si no le paso un parametro necesario
 export default makeExecutableSchema({
     typeDefs: typeDefs,
     resolvers: resolvers
