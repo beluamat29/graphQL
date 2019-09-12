@@ -20,6 +20,10 @@ export var resolvers = {
             return proyectos.find(proyecto => proyectoTieneAlPino(proyecto, pino))
         },
 
+        jardineroDe(obj, args) {
+          return pinos.find(pino => pino.nombre === args.nombre).jardinero;
+        },
+
         lenguajesDePino(obj, args) {
             return pinos.find(pino => pino.nombre === args.nombre).lenguajes
         },
@@ -39,6 +43,6 @@ export var resolvers = {
             }
             pinos.push(pino);
             return pino
-        }
+        },
     }
 };

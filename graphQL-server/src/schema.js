@@ -8,6 +8,7 @@ const typeDefs = `
     type Query {
       pinos: [Pino]
       pino(nombre: String): Pino
+      jardineroDe(nombre: String): Pino
       lenguajesDePino(nombre: String): [String]
       proyectoDePino(nombre: String): Proyecto
       conGolosinaFavorita(golosina: GolosinaFavorita): [Pino]
@@ -38,7 +39,7 @@ const typeDefs = `
     
     input PinoInput {
         nombre: String!,
-        jardinero: String!,
+        jardinero: String,
         lenguajes: [String]!,
         golosina: GolosinaFavorita!
     }
