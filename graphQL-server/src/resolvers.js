@@ -1,9 +1,14 @@
 import {pinos, proyectos} from './pinos'
 
 var baseDePinos = pinos;
+var baseDeProyectos = proyectos;
 
 const proyectoTieneAlPino = (proyecto, pino) => {
     return proyecto.pinos.some(pinoDeProyecto => pinoDeProyecto.nombre === pino.nombre)
+}
+
+const obtenerPinoPorNombre = (nombre) => {
+    return baseDePinos.find(pino => pino.nombre === nombre);
 }
 
 export var resolvers = {
@@ -23,15 +28,26 @@ export var resolvers = {
         },
 
         jardineroDe(obj, args) {
-          return baseDePinos.find(pino => pino.nombre === args.nombre).jardinero;
+          return obtenerPinoPorNombre(args.nombre).jardinero;
         },
 
         lenguajesDePino(obj, args) {
-            return baseDePinos.find(pino => pino.nombre === args.nombre).lenguajes
+            return obtenerPinoPorNombre(args.nombre).lenguajes
         },
 
         conGolosinaFavorita(obj, args){
             return baseDePinos.filter(pino => pino.golosina === args.golosina)
+        },
+
+        trabajaCon(obj, args){
+            let pino = obtenerPinoPorNombre(args.nombre);
+            let pinosDeproyectoDePino = proyectos.find(proyecto => proyectoTieneAlPino(proyecto, pino)).pinos.filter(p => p.nombre !== pino.nombre);
+
+            return pinosDeproyectoDePino;
+        },
+
+        proyectosEnIngles(){
+            return baseDeProyectos.filter(proyecto => proyecto.enIngles);
         }
     },
     Mutation: {

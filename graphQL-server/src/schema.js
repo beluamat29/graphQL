@@ -12,6 +12,8 @@ const typeDefs = `
       lenguajesDePino(nombre: String): [String]
       proyectoDePino(nombre: String): Proyecto
       conGolosinaFavorita(golosina: GolosinaFavorita): [Pino]
+      trabajaCon(nombre: String): [Pino]
+      proyectosEnIngles: [Proyecto]
     }
     
     type Mutation {

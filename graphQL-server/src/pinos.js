@@ -33,7 +33,7 @@ const mica = {
 
 const hoopla = {
     nombre: "Hoopla",
-    pinos: [belu, lucas],
+    pinos: [belu, lucas, dario],
     origen: "EEUU",
     enIngles: true
 }
