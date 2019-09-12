@@ -1,5 +1,7 @@
 import {pinos, proyectos} from './pinos'
 
+var baseDePinos = pinos;
+
 const proyectoTieneAlPino = (proyecto, pino) => {
     return proyecto.pinos.some(pinoDeProyecto => pinoDeProyecto.nombre === pino.nombre)
 }
@@ -8,28 +10,28 @@ export var resolvers = {
     //cada uno de estos es un resolver
     Query: {
         pinos() {
-            return pinos
+            return baseDePinos
         },
 
         pino(obj, args) {
-            return pinos.find(pino => pino.nombre === args.nombre);
+            return baseDePinos.find(pino => pino.nombre === args.nombre);
         },
 
         proyectoDePino(obj,args) {
-            let pino = pinos.find(pino => pino.nombre === args.nombre);
+            let pino = baseDePinos.find(pino => pino.nombre === args.nombre);
             return proyectos.find(proyecto => proyectoTieneAlPino(proyecto, pino))
         },
 
         jardineroDe(obj, args) {
-          return pinos.find(pino => pino.nombre === args.nombre).jardinero;
+          return baseDePinos.find(pino => pino.nombre === args.nombre).jardinero;
         },
 
         lenguajesDePino(obj, args) {
-            return pinos.find(pino => pino.nombre === args.nombre).lenguajes
+            return baseDePinos.find(pino => pino.nombre === args.nombre).lenguajes
         },
 
         conGolosinaFavorita(obj, args){
-            return pinos.filter(pino => pino.golosina === args.golosina)
+            return baseDePinos.filter(pino => pino.golosina === args.golosina)
         }
     },
     Mutation: {
@@ -41,8 +43,12 @@ export var resolvers = {
                 lenguajes: input.lenguajes,
                 golosina: input.golosina
             }
-            pinos.push(pino);
+            baseDePinos.push(pino);
             return pino
         },
+        eliminarPino(obj, args){
+            baseDePinos = pinos.filter(pino => pino.nombre !== args.nombre);
+            return baseDePinos
+        }
     }
 };

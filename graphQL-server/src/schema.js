@@ -16,6 +16,7 @@ const typeDefs = `
     
     type Mutation {
         agregarPino(input: PinoInput): Pino
+        eliminarPino(nombre: String): [Pino]
     }
     
     type Pino {
