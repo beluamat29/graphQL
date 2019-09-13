@@ -22,6 +22,13 @@ export var resolvers = {
             return baseDePinos.find(pino => pino.nombre === args.nombre);
         },
 
+        proyectos(){
+            return baseDeProyectos
+        },
+
+        proyecto(obj, args) {
+            return baseDeProyectos.find(proyecto => proyecto.nombre === args.nombre);
+        },
         proyectoDePino(obj,args) {
             let pino = baseDePinos.find(pino => pino.nombre === args.nombre);
             return proyectos.find(proyecto => proyectoTieneAlPino(proyecto, pino))
@@ -64,7 +71,12 @@ export var resolvers = {
         },
         eliminarPino(obj, args){
             baseDePinos = pinos.filter(pino => pino.nombre !== args.nombre);
-            return baseDePinos
+            return baseDePinoss
+        },
+        agregarPinoAProyecto(obj, args) {
+            let pinoAAgregar = obtenerPinoPorNombre(args.pino);
+            baseDeProyectos.find(proyecto => proyecto.nombre === args.proyecto).pinos.push(pinoAAgregar);
+            return baseDeProyectos.find(proyecto => proyecto.nombre === args.proyecto)
         }
     }
 };

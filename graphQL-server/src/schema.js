@@ -14,11 +14,14 @@ const typeDefs = `
       conGolosinaFavorita(golosina: GolosinaFavorita): [Pino]
       trabajaCon(nombre: String): [Pino]
       proyectosEnIngles: [Proyecto]
+      proyectos: [Proyecto]
+      proyecto(nombre: String): Proyecto
     }
     
     type Mutation {
         agregarPino(input: PinoInput): Pino
         eliminarPino(nombre: String): [Pino]
+        agregarPinoAProyecto(pino: String, proyecto: String): Proyecto
     }
     
     type Pino {
