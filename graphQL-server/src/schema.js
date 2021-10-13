@@ -6,66 +6,53 @@ import { resolvers } from './resolvers.js'
 
 const typeDefs = ` 
     type Query {
-      pinos: [Pino]
-      pino(nombre: String): Pino
-      jardineroDe(nombre: String): Pino
-      lenguajesDePino(nombre: String): [String]
-      proyectoDePino(nombre: String): Proyecto
-      conGolosinaFavorita(golosina: GolosinaFavorita): [Pino]
-      trabajaCon(nombre: String): [Pino]
-      proyectosEnIngles: [Proyecto]
-      proyectos: [Proyecto]
-      proyecto(nombre: String): Proyecto
+      alumnos: [Alumno]
+      alumno(nombre: String): Alumno
+      lenguajesDeAlumno(nombre: String): [String]
+      proyectoDeAlumno(nombre: String): Proyecto
+      conGolosinaFavorita(golosina: GolosinaFavorita): [Alumno]
     }
     
     type Mutation {
-        agregarPino(input: PinoInput): Pino
-        eliminarPino(nombre: String): [Pino]
-        agregarPinoAProyecto(pino: String, proyecto: String): Proyecto
+        agregarAlumno(input: AlumnoInput): Alumno
+        eliminarAlumno(nombre: String): [Alumno]
     }
     
-    type Pino {
+    type Alumno {
         nombre: String!
-        jardinero: Pino
+        trabajoFinal: TrabajoFinal?
         lenguajes: [ String ]
-        golosina: GolosinaFavorita
+        golosina: GolosinaFavorita?
     }
     
-    type Proyecto {
+    type TrabajoFinal {
         nombre: String!
-        pinos: [Pino]
-        enIngles: Boolean
+        lenguajes: [String]
+        repositorio: SVCRepo
     }
     
+     enum SVCRepo {
+        GITHUB,
+        GITLAB,
+        BITBUCKET
+     }
+     
      enum GolosinaFavorita {
         SKITTLES,
         OREOS,
         SUGUS
     }
     
-    input PinoInput {
+    input AlumnoInput {
         nombre: String!,
-        jardinero: String,
+        trabajoFinal: TrabajoFinal?,
         lenguajes: [String]!,
-        golosina: GolosinaFavorita!
+        golosina: GolosinaFavorita?
     }
-
-`;
-
-
-//POSIBLES CONSULTAS:
-// LISTA DE GOLOSINAS DE TODOS LOS PINOS DE UN PROYECTO
-//GOLOSINA MAS POPULAR EN UN PROYECTO
-//GOLOSINA DEL JARDINERO DE ALGUIEN
-//COMPAÑEROS DE PROYECTO DE ALGUIEN
-
-//PINO ES UN GRAPHQL OBJECT TYPE
-//En cualquier servidor GraphQL DEBE existir el type Query. Mutation es opcional
-
-//PARA PODER LEVANTAR LA APP DEBE HABER POR LO MENOS UNA QUERY
-//PERO PARA QUE LAS QUERYS DEVUELVAN DATOS, TIENE QUE HABER UN RESOLVER QUE SE HAGA CARGO DE ELLAS
+    ;
 
 export default makeExecutableSchema({
     typeDefs: typeDefs,
     resolvers: resolvers
 })
+    
